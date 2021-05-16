@@ -1,5 +1,6 @@
 const usersDB = require('./user.db.js');
 const User = require('./user.model');
+const taskService = require('../tasks/tasks.service');
 
 const getAll = async () => usersDB;
 const getById = async (userId) => usersDB.filter((user) => user.id === userId)
@@ -25,6 +26,7 @@ const deleteUser = async (userId) => {
   let deletedUser;
   if (userIndex !== -1) {
     [deletedUser] = usersDB.splice(userIndex, 1);
+    taskService.unassignTaskByUserId(deletedUser.id);
   }
 
   return deletedUser;

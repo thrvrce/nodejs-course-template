@@ -21,13 +21,7 @@ class Task {
 
   static toResponse(task) {
 
-    // console.log(task)
-    // if (task) {
-    //   const { columnId, description, order, title, userId } = task;
 
-    //   // console.log(typeof )
-    // return { columnId, description, order, title, userId };
-    // }
 
     return task;
 

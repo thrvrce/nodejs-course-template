@@ -8,5 +8,6 @@ const createtask = (boardId, taskData) => {
 const updatetask = (taskId, taskData) => tasksRepo.updatetask(taskId, taskData);
 const deletetask = (boardId, taskId) => tasksRepo.deletetask(boardId, taskId);
 const deleteTaskByDoardId = (boardId) => tasksRepo.deleteTaskByDoardId(boardId);
+const unassignTaskByUserId = (userId) => tasksRepo.unassignTaskByUserId(userId);
 
-module.exports = { getAll, getById, createtask, updatetask, deletetask, deleteTaskByDoardId };
+module.exports = { getAll, getById, createtask, updatetask, deletetask, deleteTaskByDoardId, unassignTaskByUserId };

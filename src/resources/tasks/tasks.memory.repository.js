@@ -34,4 +34,11 @@ const deleteTaskByDoardId = async (boardId) => {
   tasksDB = tasksDB.filter( task => task.boardId !== boardId);
 }
 
-module.exports = { getAll, getById, createtask, updatetask, deletetask, deleteTaskByDoardId };
+const unassignTaskByUserId = async (userId) => {
+  tasksDB = tasksDB.map( task => {
+    const updatetTask = task;
+    updatetTask.userId = task.userId === userId ? null : task.userId;
+    return updatetTask});
+}
+
+module.exports = { getAll, getById, createtask, updatetask, deletetask, deleteTaskByDoardId, unassignTaskByUserId };
