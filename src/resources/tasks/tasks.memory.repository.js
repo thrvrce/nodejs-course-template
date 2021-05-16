@@ -1,4 +1,4 @@
-const tasksDB = require('./tasks.db');
+let tasksDB = require('./tasks.db');
 const Task = require('./tasks.model');
 
 const getAll = async (boardId) => boardId && boardId !== 'undefined' ? tasksDB.filter(task =>  task.boardId === boardId) : tasksDB;
@@ -30,4 +30,8 @@ const deletetask = async (boardId, taskId) => {
   return deletedtask;
 }
 
-module.exports = { getAll, getById, createtask, updatetask, deletetask };
+const deleteTaskByDoardId = async (boardId) => {
+  tasksDB = tasksDB.filter( task => task.boardId !== boardId);
+}
+
+module.exports = { getAll, getById, createtask, updatetask, deletetask, deleteTaskByDoardId };

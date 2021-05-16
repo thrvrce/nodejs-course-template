@@ -10,9 +10,9 @@ router.route('/').get(async (req, res) => {
 });
 
 router.route('/:taskId').get(async (req, res) => {
-
+  console.log(req.params)
   const [task] = await taskService.getById(req.params.taskId);
-
+  console.log(task)
   res.status(task ? 200 : 404)
   res.json(Task.toResponse(task));
 })
