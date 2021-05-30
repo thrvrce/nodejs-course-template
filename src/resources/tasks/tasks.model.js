@@ -1,6 +1,11 @@
 const uuid = require('uuid').v4;
 
 class Task {
+  /**
+   * Creates new Task object
+   * @param {object} param0 object with properties title, order, descriprion, userId, boardId, columnId
+   * @returns {object} new user object with given properties
+   */
   constructor({
     id = uuid(),
     title,
@@ -19,6 +24,11 @@ class Task {
     this.columnId = columnId;
   }
 
+  /**
+   * Return Task object without sensitive data
+   * @param {object} task task object
+   * @returns Task object without sensitive data
+   */
   static toResponse(task) {
 
 
