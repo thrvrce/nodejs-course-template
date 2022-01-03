@@ -2,9 +2,15 @@ import {createLogger,
     format,
     transports,
   } from 'winston';
+import dotenv from 'dotenv';
+import  {join} from 'path';
+
+dotenv.config({
+    path:join(process.cwd(), '../../../.env')
+})
 
 const logger = createLogger({
-  level: 'silly',
+  level: process.env.LOG_LEVEL,
   format: format.combine(
     format.colorize(),
     format.cli(),
@@ -21,7 +27,6 @@ const logger = createLogger({
     }),
     new transports.File({
       filename: 'all.log',
-      level: 'silly',
       format: format.combine(
         format.uncolorize(),
         format.json()
