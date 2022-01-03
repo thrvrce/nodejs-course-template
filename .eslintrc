@@ -43,8 +43,8 @@
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
     "node/no-missing-import": ["error", {
-      "allowModules": ["express"],
-      "tryExtensions": [".ts"]
+      "allowModules": ["express", "winston"],
+      "tryExtensions": [".ts", ".js" , ".node"]
   }]
   }
 }
