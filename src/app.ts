@@ -3,11 +3,13 @@ import swaggerUI from 'swagger-ui-express';
 import path from 'path';
 import YAML from 'yamljs';
 import  {finished} from 'stream';
+import {StatusCodes} from 'http-status-codes';
 
 import {router as userRouter} from './resources/users/user.router';
 import {router as taskRouter} from './resources/tasks/tasks.router';
 import {router as boardRouter} from './resources/boards/boards.router';
-import {logInfo} from './utils/logging'
+import {logInfo, logError} from './utils/logging'
+import { commonRequestErrorHandler } from './utils/errorHandler';
 
 export const app = express.default();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -33,11 +35,17 @@ app.use((req, res, next) => {
     const {params, query} = req;
     const ms = Date.now() - start;
     const {statusCode} = res;
-
-    logInfo(`${method} ${url} parameters: ${JSON.stringify(params)} query string parameters: ${JSON.stringify(query)} request body: ${JSON.stringify(body)} ${statusCode} [${ms}ms]`)
+    const logMessage = `${method} ${url} parameters: ${JSON.stringify(params)} query string parameters: ${JSON.stringify(query)} request body: ${JSON.stringify(body)} ${statusCode} [${ms}ms]`;
+     if (statusCode < StatusCodes.BAD_REQUEST) {
+      logInfo(logMessage)
+     } else {
+      logError(logMessage)
+     }
   })
 });
 
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards/:boardId/tasks', taskRouter);
+
+app.use(commonRequestErrorHandler)

@@ -18,3 +18,7 @@ const logger = createLogger({
 export const logInfo = (message: string) => {
   logger.log('info', message)
 }
+
+export const logError = (message: string) => {
+  logger.log('error', message)
+}
