@@ -30,3 +30,14 @@ export const commonRequestErrorHandler = (err: ICustomRequestErrorHandlerError |
   }
   logError(`Error: ${err.message}`)
 }
+
+process.on('uncaughtException', (error) => {
+  logError(`captured error: ${error.message}`);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (error) => {
+  const err = error as Error;
+  logError(`Unhandled rejection detected: ${err.message}`);
+  process.exit(1);
+});
