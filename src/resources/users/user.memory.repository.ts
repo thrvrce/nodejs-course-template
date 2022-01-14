@@ -6,21 +6,21 @@ import {User, IUser} from './user.model';
  * Returns array of all users
  * @returns { Promise<IUser[]>} Promise with array of users
  */
-const getAll = async () => usersDB;
+const getAll =  () => usersDB;
 
 /**
  * Returns user object by given id
  * @param {string} userId user id
  * @returns {Promise<IUser[]>} Promise with array of users with given id
  */
-const getById = async (userId: string) => usersDB.filter((user) => user.id === userId)
+const getById =  (userId: string) => usersDB.filter((user) => user.id === userId)
 
 /**
  * Creates user with given properties
  * @param {IUser} userData object with user data
  * @returns {Promise<User>} Promise with new object with user data
  */
-const createUser = async (userData: IUser) => {
+const createUser =  (userData: IUser) => {
   const newUser = new User(userData);
   usersDB.push(newUser);
   return newUser;
@@ -32,8 +32,8 @@ const createUser = async (userData: IUser) => {
  * @param {IUser} userData object with user data for update
  * @returns {Promise<IUser>} Promise with updated user object
  */
-const updateUser = async (userId: string, userData: IUser) => {
-  const [user] = await getById(userId);
+const updateUser =  (userId: string, userData: IUser) => {
+  const [user] =  getById(userId);
   if (user) {
     user.id = userData.id ? userData.id : user.id;
     user.name = userData.name ? userData.name : user.name;
@@ -49,8 +49,8 @@ const updateUser = async (userId: string, userData: IUser) => {
  * @param {string} userId
  * @returns {Promise<IUser | undefined>} Promise with deleted user object
  */
-const deleteUser = async (userId: string) => {
-  const [user] = await getById(userId);
+const deleteUser =  (userId: string) => {
+  const [user] =  getById(userId);
 
   const userIndex = usersDB.indexOf(user);
 

@@ -27,25 +27,17 @@ export class Task implements ITask {
 
   /**
    * Creates new Task object
-   * @param {{ id?: string | undefined; title?: string | undefined; order?: number | undefined; description?: string | undefined; userId?: null | undefined; boardId?: null | undefined; columnId?: null | undefined; }} param0 object with properties title, order, descriprion, userId, boardId, columnId
+   * @param {Partial<ITask>} param0 object with properties title, order, descriprion, userId, boardId, columnId
    * @returns {ITask} new ITask object with given properties
    */
-  constructor({
-    id = uuid(),
-    title = '',
-    order = 0,
-    description = '',
-    userId = null,
-    boardId = null,
-    columnId = null,
-  } = {}) {
-    this.id = id;
-    this.title = title;
-    this.order = order;
-    this.description = description;
-    this.userId = userId;
-    this.boardId = boardId;
-    this.columnId = columnId;
+  constructor(taskData: Partial<ITask>) {
+    this.id = taskData.id ??  uuid();
+    this.title = taskData.title ??  '';
+    this.order = taskData.order ??  0;
+    this.description = taskData.description ??  '';
+    this.userId = taskData.userId ??  null;
+    this.boardId = taskData.boardId ??  null;
+    this.columnId = taskData.columnId ??  null;
   }
 
   /**
