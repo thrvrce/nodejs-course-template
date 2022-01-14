@@ -12,7 +12,7 @@ import {logInfo, logError} from './utils/logging'
 import { commonRequestErrorHandler } from './utils/errorHandler';
 
 export const app = express.default();
-const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
+const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml')) as Record<string, unknown>;
 
 app.use(express.json());
 
@@ -26,8 +26,9 @@ app.use('/', (req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  const {method, url, body} = req;
+app.use((req: express.Request, res, next) => {
+  const {method, url } = req;
+  const body  = req.body as Record<string, unknown>;
   const start = Date.now();
   next();
 

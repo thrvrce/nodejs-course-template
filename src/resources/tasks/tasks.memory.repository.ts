@@ -5,20 +5,20 @@ import  {Task, ITask } from './tasks.model';
  * @param {string | undefined} boardId if given, filter tasks by board id
  * @returns {Promise<ITask[]>} Promise with array of all tasks or array of all tasks by board id
  */
-export const getAll = async (boardId: string | undefined) => boardId && boardId !== 'undefined' ? tasksDB.filter(task =>  task.boardId === boardId) : tasksDB;
+export const getAll =  (boardId: string | undefined) => boardId && boardId !== 'undefined' ? tasksDB.filter(task =>  task.boardId === boardId) : tasksDB;
 
 /**
  * Returns array with task filterred by id
  * @param {string} taskId task id
  * @returns {Promise<ITask[]>} array with task filterred by id
  */
-export const getById = async (taskId: string) => tasksDB.filter((task) => task.id === taskId)
+export const getById =  (taskId: string) => tasksDB.filter((task) => task.id === taskId)
 /**
  * Creates task
- * @param {ITask} taskData data for new task
+ * @param {Partial<ITask>} taskData data for new task
  * @returns {Promise<Task>} returns promise with created task
  */
-export const createtask = async (taskData: { id?: string | undefined; title?: string | undefined; order?: number | undefined; description?: string | undefined; userId?: null | undefined; boardId?: null | undefined; columnId?: null | undefined; }) => {
+export const createtask = (taskData: Partial<ITask>) => {
   const newtask = new Task(taskData);
   tasksDB.push(newtask);
   return newtask;
@@ -27,11 +27,11 @@ export const createtask = async (taskData: { id?: string | undefined; title?: st
 /**
  * Updates task by id
  * @param {string} taskId task id
- * @param {ITask} taskData tasks new values
+ * @param {Partial<ITask>} taskData tasks new values
  * @returns {Promise<ITask>} Promise with updated task
  */
-export const updatetask = async (taskId: string, taskData: ITask) => {
-  const [task] = await getById(taskId);
+export const updatetask =  (taskId: string, taskData: Partial<ITask>) => {
+  const [task] =  getById(taskId);
   if (task) {
     task.id = taskData.id ? taskData.id : task.id;
     task.title = taskData.title ? taskData.title : task.title;
@@ -50,8 +50,8 @@ export const updatetask = async (taskId: string, taskData: ITask) => {
  * @param {string} taskId task id
  * @returns {Promise<ITask | undefined>} Promise with deleted task
  */
-export const deletetask = async (taskId: string) => {
-  const [task] = await getById(taskId);
+export const deletetask =  (taskId: string) => {
+  const [task] =  getById(taskId);
 
   const taskIndex = tasksDB.indexOf(task);
 
@@ -66,9 +66,9 @@ export const deletetask = async (taskId: string) => {
 /**
  * Deletes all tasks by board id
  * @param {string} boardId board id
- * @returns {Promise<void>} Promise with nothing
+ * @returns {void} Promise with nothing
  */
-export const deleteTaskByDoardId = async (boardId: string) => {
+export const deleteTaskByDoardId = (boardId: string): void => {
   let boardIndex = tasksDB.findIndex(task => task.boardId=== boardId);
   while( boardIndex !== -1) {
     tasksDB.splice(boardIndex, 1)
@@ -81,7 +81,7 @@ export const deleteTaskByDoardId = async (boardId: string) => {
  * @param {string} userId user id
  * @returns {Promise<void>} Promise with nothing
  */
-export const unassignTaskByUserId = async (userId: string) => {
+export const unassignTaskByUserId = (userId: string) => {
   tasksDB.forEach( task => {
     const updatetTask = task;
     updatetTask.userId = task.userId === userId ? null : task.userId;

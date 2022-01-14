@@ -1,12 +1,12 @@
 import {Router, Request, Response, NextFunction } from 'express';
-import {User} from './user.model';
+import {User, IUser} from './user.model';
 import * as usersService from './user.service';
 
 export const router = Router();
 
-router.route('/').get(async (req: Request, res: Response, next: NextFunction) => {
+router.route('/').get( (req: Request, res: Response, next: NextFunction) => {
   try {
-    const users = await usersService.getAll();
+    const users =  usersService.getAll();
     res.status(200)
     res.json(users.map(User.toResponse));
   } catch (err) {
@@ -14,9 +14,9 @@ router.route('/').get(async (req: Request, res: Response, next: NextFunction) =>
   }
 });
 
-router.route('/:userId').get(async (req: Request, res: Response, next: NextFunction) => {
+router.route('/:userId').get( (req: Request, res: Response, next: NextFunction) => {
   try {
-    const [user] = await usersService.getById(req.params.userId);
+    const [user] =  usersService.getById(req.params.userId);
     res.status(200)
     res.json(User.toResponse(user));
   } catch (err) {
@@ -24,9 +24,9 @@ router.route('/:userId').get(async (req: Request, res: Response, next: NextFunct
   }
 })
 
-router.route('/').post(async (req: Request, res: Response, next: NextFunction) => {
+router.route('/').post( (req: Request<Record<string, unknown>, Record<string, unknown>, IUser>, res: Response, next: NextFunction) => {
   try {
-    const user = await usersService.createUser(req.body);
+    const user =  usersService.createUser(req.body);
     res.status(201)
     res.json(User.toResponse(user));
   } catch (err) {
@@ -34,9 +34,9 @@ router.route('/').post(async (req: Request, res: Response, next: NextFunction) =
   }
 })
 
-router.route('/:userId').put(async (req: Request, res: Response, next: NextFunction) => {
+router.route('/:userId').put( (req: Request<{userId: string}, Record<string, unknown>, IUser>, res: Response, next: NextFunction) => {
   try {
-    const user =  await usersService.updateUser(req.params.userId, req.body);
+    const user =   usersService.updateUser(req.params.userId, req.body);
     res.status(user? 200 : 400)
     res.json(user? User.toResponse(user): {});
   } catch (err) {
@@ -44,9 +44,9 @@ router.route('/:userId').put(async (req: Request, res: Response, next: NextFunct
   }
 })
 
-router.route('/:userId').delete(async (req: Request, res: Response, next: NextFunction) => {
+router.route('/:userId').delete( (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user =  await usersService.deleteUser(req.params.userId);
+    const user =   usersService.deleteUser(req.params.userId);
     res.status(user? 204 : 404)
     res.json(user? User.toResponse(user): {});
   } catch (err) {
