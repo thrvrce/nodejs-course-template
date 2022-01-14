@@ -6,21 +6,21 @@ import * as taskService  from '../tasks/tasks.service';
  * Returns array of all boards
  * @returns {Promise<IBoard[]>} promise with array of all boards or boards with specific id
  */
-const getAll = () => boardsDB;
+const getAll = async () => boardsDB;
 
 /**
  * Returns board by id
  * @param {string | undefined} boardId board.id property
  * @returns {Promise<IBoard[]>} promise with board object
  */
-const getById = (boardId: string | undefined) => boardsDB.filter((board) => board.id === boardId)
+const getById = async (boardId: string | undefined) => boardsDB.filter((board) => board.id === boardId)
 
 /**
  * Creates new board object
  * @param {IBoard} boardData object with board properties
  * @returns {Promise<Board>} promise with board object
  */
-const createboard =  (boardData: IBoard) => {
+const createboard = async (boardData: IBoard) => {
   const newboard = new Board(boardData);
   boardsDB.push(newboard);
   return newboard;
@@ -32,8 +32,8 @@ const createboard =  (boardData: IBoard) => {
  * @param {IBoard} boardData object with board new propertt values
  * @returns {Promise<IBoard>} promise with updated board object
  */
-const updateboard = (boardId: string | undefined, boardData : IBoard) => {
-  const [board] = getById(boardId);
+const updateboard = async (boardId: string | undefined, boardData : IBoard) => {
+  const [board] = await getById(boardId);
   if (board) {
     board.id = boardData.id ? boardData.id : board.id;
     board.title = boardData.title ? boardData.title : board.title;
@@ -48,8 +48,8 @@ const updateboard = (boardId: string | undefined, boardData : IBoard) => {
  * @param {string} boardId board.id property
  * @returns {Promise<IBoard | undefined>} promise with deleted board object
  */
-const deleteboard = (boardId: string) => {
-  const [board] = getById(boardId);
+const deleteboard = async (boardId: string) => {
+  const [board] = await getById(boardId);
 
   const boardIndex = boardsDB.indexOf(board);
 
