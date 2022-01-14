@@ -3,3 +3,4 @@ out
 dist
 doc
 .vscode
+*.log
