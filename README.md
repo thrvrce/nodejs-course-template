@@ -1,3 +1,4 @@
+Attempt to correct actions
 # RS School REST service
 
 ## Prerequisites
