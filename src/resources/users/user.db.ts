@@ -1,7 +1,7 @@
-const uuid = require('uuid').v4;
+import {v4 as uuid} from 'uuid'
+import { IUser } from './user.model'
 
-
-const usersDB = [
+export const usersDB: IUser[] = [
   {
     id : '1',
     name : 'name1',
@@ -21,5 +21,3 @@ const usersDB = [
     password : 'password4',
   },
 ]
-
-module.exports = usersDB;

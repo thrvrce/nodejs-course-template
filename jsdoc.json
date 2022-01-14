@@ -1,0 +1,12 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["src/resources/boards", "src/resources/tasks", "src/resources/users"],
+    "includePattern": ".(jsx|js|ts|tsx)$",
+    "excludePattern": "node_modules"
+  }
+
+}

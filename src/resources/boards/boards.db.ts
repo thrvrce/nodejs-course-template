@@ -1,7 +1,16 @@
-const uuid = require('uuid').v4;
+import {v4 as uuid} from 'uuid'
 
+export type Column = {
+  title: string;
+  order: number;
+}
 
-const boardsDB = [
+export interface IBoard  {
+  id: string;
+  title: string;
+  columns: Array<Column>
+}
+export const boardsDB: Array<IBoard> = [
   {
     id : '1',
     title : 'title_1',
@@ -23,5 +32,3 @@ const boardsDB = [
     columns : [],
   },
 ]
-
-module.exports = boardsDB;

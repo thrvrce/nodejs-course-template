@@ -1,7 +1,7 @@
-const uuid = require('uuid').v4;
+import {v4 as uuid} from 'uuid'
+import { ITask } from './tasks.model'
 
-
-const tasksDB = [
+export const tasksDB: ITask[] = [
   {
     id : '1',
     title : 'title_1',
@@ -39,5 +39,3 @@ const tasksDB = [
     columnId : '1',
   },
 ]
-
-module.exports = tasksDB;
