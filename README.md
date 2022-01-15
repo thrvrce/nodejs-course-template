@@ -71,3 +71,18 @@ npm run lint
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+
+## Docker
+
+### Building images
+Run following command inside application root folder
+```
+docker-compose build
+```
+
+### Running application in a container
+Run following command inside application root folder
+```
+docker-compose up
+```
