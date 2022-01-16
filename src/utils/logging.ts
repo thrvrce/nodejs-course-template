@@ -18,7 +18,7 @@ const logger = createLogger({
   transports: [
     new transports.Console(),
     new transports.File({
-      filename: 'error.log',
+      filename: './logs/error.log',
       level: 'error',
       format: format.combine(
         format.uncolorize(),
@@ -26,7 +26,7 @@ const logger = createLogger({
       )
     }),
     new transports.File({
-      filename: 'all.log',
+      filename: './logs/all.log',
       format: format.combine(
         format.uncolorize(),
         format.json()

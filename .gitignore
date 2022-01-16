@@ -4,3 +4,6 @@ dist
 doc
 .vscode
 *.log
+database/data
+logs
+.github

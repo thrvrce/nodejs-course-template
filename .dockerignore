@@ -1,0 +1,11 @@
+node_modules
+test
+dist
+.git
+.vscode
+.github
+database
+*.md
+src
+database
+logs
